@@ -1,0 +1,1 @@
+This is a JS single page web app project that I have been working on as a refresher on my JS DOM skills. 
