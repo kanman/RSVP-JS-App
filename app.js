@@ -5,8 +5,28 @@ const form = document.getElementById('registrar');
 const input = form.querySelector('input');
 const ul = document.getElementById('invitedList');
 
+//2. function to create the UI elements: 'li', 'label', 'checkbox' and 'button'
 
-//2. Form Submission function
+function createLI(text) {
+    const li = document.createElement('li');
+    li.textContent = text;
+    
+    
+    const label = document.createElement('label');
+    label.textContent = ' confirmed';
+    
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    label.appendChild(checkbox);
+    
+    li.appendChild(label);
+    
+    const button = document.createElement('button');
+    button.textContent = 'remove';
+    li.appendChild(button);  
+    return li;  
+}
+//3. Form Submission function
 
 form.addEventListener('submit', (e) => {
 e.preventDefault();   
@@ -15,28 +35,10 @@ const text = input.value;
 
 input.value = '';
 
-//3. Create 'li', 'label' and 'checkbox' elements under the parent node
-
-const li = document.createElement('li');
-li.textContent = text;
+//4. Create 'li', 'label' and 'checkbox' elements under the parent node
 
 
-const label = document.createElement('label');
-label.textContent = ' confirmed';
-
-const checkbox = document.createElement('input');
-checkbox.type = 'checkbox';
-label.appendChild(checkbox);
-
-li.appendChild(label);
-
-
-//4. Adding a button in to each 'li' so we will be able to remove an invitee. Adding text to the button
-//and appending it to the 'li'.
-
-const button = document.createElement('button');
-button.textContent = 'remove';
-li.appendChild(button);
+const li = createLI(text);
 
 ul.appendChild(li);
 });
@@ -75,6 +77,8 @@ const li = e.target.parentNode;
 const ul = li.parentNode;
 ul.removeChild(li);    
 }
+
+
 
 });
 
