@@ -1,12 +1,12 @@
 
-//Declaration of main variables
+//1. Declaration of main variables for the form UI
 
 const form = document.getElementById('registrar');
 const input = form.querySelector('input');
 const ul = document.getElementById('invitedList');
 
 
-//Form Submission function
+//2. Form Submission function
 
 form.addEventListener('submit', (e) => {
 e.preventDefault();   
@@ -15,6 +15,7 @@ const text = input.value;
 
 input.value = '';
 
+//3. Create 'li', 'label' and 'checkbox' elements under the parent node
 
 const li = document.createElement('li');
 li.textContent = text;
@@ -30,7 +31,8 @@ label.appendChild(checkbox);
 li.appendChild(label);
 
 
-//Adding a button in to each 'li' so we will be able to remove an invitee.
+//4. Adding a button in to each 'li' so we will be able to remove an invitee. Adding text to the button
+//and appending it to the 'li'.
 
 const button = document.createElement('button');
 button.textContent = 'remove';
@@ -39,16 +41,18 @@ li.appendChild(button);
 ul.appendChild(li);
 });
 
-//After form submission, we add the change event handler in for the changed checkbox state (check, uncheck)
+//5. After form submission, we add the event handler in for the changed checkbox state (check, uncheck)
+//On check/uncheck, the 'li' will be marked or unmarked.
 
 ul.addEventListener('change', (e) => {
     const checkbox = event.target;
     const checked = checkbox.checked;
 
-    //Our variable (listItem) is set to the checkbox, which is a child of the label node, which is a child of the
-    //"li" node.
+//Our variable (listItem) is set to the checkbox, which is a child of the label node, which is a child of the
+//"li" node.
 
-    const listItem = checkbox.parentNode.parentNode;
+const listItem = checkbox.parentNode.parentNode;
+
 
 //If statement to activate classname styles if the checkbox is checked.
     if (checked) {
@@ -59,7 +63,8 @@ ul.addEventListener('change', (e) => {
 
 });
 
-//Add an event listener to the button click event so it filters up the dom to the 'ul'
+//6. Add an event listener to the button click event so it filters up the dom to the 'ul'. 
+//Remove the 'li' element if the click event is targetting the button element.
 
 ul.addEventListener('click', (e) => {
 //1.filter out elements on the 'ul' that are not buttons
