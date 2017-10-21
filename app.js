@@ -47,6 +47,7 @@ ul.addEventListener('change', (e) => {
 
     //Our variable (listItem) is set to the checkbox, which is a child of the label node, which is a child of the
     //"li" node.
+
     const listItem = checkbox.parentNode.parentNode;
 
 //If statement to activate classname styles if the checkbox is checked.
@@ -58,7 +59,19 @@ ul.addEventListener('change', (e) => {
 
 });
 
+//Add an event listener to the button click event so it filters up the dom to the 'ul'
 
+ul.addEventListener('click', (e) => {
+//1.filter out elements on the 'ul' that are not buttons
+//2.Use the removeChild method to remove the 'li' from the 'ul'
+
+if (e.target.tagName === 'BUTTON') {
+const li = e.target.parentNode;
+const ul = li.parentNode;
+ul.removeChild(li);    
+}
+
+});
 
 
 
