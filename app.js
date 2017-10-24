@@ -78,9 +78,9 @@ const ul = li.parentNode;
 ul.removeChild(li);    
 }
 
-
-
 });
+
+
 
 
 
