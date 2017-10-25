@@ -9,7 +9,10 @@ const ul = document.getElementById('invitedList');
 
 function createLI(text) {
     const li = document.createElement('li');
-    li.textContent = text;
+    const span = document.createElement('span');
+
+    span.textContent = text;
+    li.appendChild(span);
        
     const label = document.createElement('label');
     label.textContent = ' confirmed';
@@ -86,14 +89,34 @@ if (e.target.tagName === 'BUTTON') {
 //Add another 'if' statement to check the text content of the buttons and ignore if it finds an 'edit' text.
 //So that the edit button is not removed on a 'click' even in the 'ul'.
 const button = e.target;
-const li = e.target.parentNode;
+const li = button.parentNode;
 const ul = li.parentNode;
+
+
 
 if(button.textContent === 'remove'){     
 ul.removeChild(li);    
-        } else if (button.textContent === 'edit') {
-console.log('edit');
-            }
+} else if (button.textContent === 'edit') {
+const span = li.firstElementChild;
+const input = document.createElement('input');
+input.type = 'text';
+input.value = span.textContent;
+li.insertBefore(input, span);
+li.removeChild(span);
+button.textContent = 'save';
+
+//Change the state of the 'li' to a 'saved' state on clicking the 'save' button.
+
+} else if (button.textContent === 'save') {
+const input = li.firstElementChild;
+const span = document.createElement('span');
+span.textContent = input.value;
+li.insertBefore(span, input);
+li.removeChild(input);
+button.textContent = 'edit';
+}
+
+
         }
 });
 
