@@ -10,8 +10,7 @@ const ul = document.getElementById('invitedList');
 function createLI(text) {
     const li = document.createElement('li');
     li.textContent = text;
-    
-    
+       
     const label = document.createElement('label');
     label.textContent = ' confirmed';
     
@@ -21,10 +20,20 @@ function createLI(text) {
     
     li.appendChild(label);
     
-    const button = document.createElement('button');
-    button.textContent = 'remove';
-    li.appendChild(button);  
-    return li;  
+
+//Adding in an edit button before the remove button
+
+    const editButton = document.createElement('button');
+    editButton.textContent = "edit";
+    li.appendChild(editButton);
+
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'remove';
+    li.appendChild(removeButton);  
+    return li; 
+ 
+
+
 }
 //3. Form Submission function
 
@@ -73,11 +82,19 @@ ul.addEventListener('click', (e) => {
 //2.Use the removeChild method to remove the 'li' from the 'ul'
 
 if (e.target.tagName === 'BUTTON') {
+
+//Add another 'if' statement to check the text content of the buttons and ignore if it finds an 'edit' text.
+//So that the edit button is not removed on a 'click' even in the 'ul'.
+const button = e.target;
 const li = e.target.parentNode;
 const ul = li.parentNode;
-ul.removeChild(li);    
-}
 
+if(button.textContent === 'remove'){     
+ul.removeChild(li);    
+        } else if (button.textContent === 'edit') {
+console.log('edit');
+            }
+        }
 });
 
 
