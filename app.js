@@ -1,3 +1,16 @@
+//Additional UI. Change Header on form submit.
+
+const firstForm = document.getElementById('celeb');
+const response = document.getElementById('celebration');
+const headline = document.getElementById('userheadline');
+
+firstForm.addEventListener('submit', (e) => {
+e.preventDefault(); 
+
+headline.innerHTML = response.value;
+response.value = '';
+
+});
 
 //1. Declaration of main variables for the form UI
 
@@ -42,6 +55,7 @@ function createLI(text) {
 
 form.addEventListener('submit', (e) => {
 e.preventDefault();   
+
 
 const text = input.value;
 
