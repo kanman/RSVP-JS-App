@@ -1,22 +1,69 @@
-//Additional UI. Change Header on form submit.
+//Additional UI. User generated header on first form submit.
 
 const firstForm = document.getElementById('celeb');
 const response = document.getElementById('celebration');
 const headline = document.getElementById('userheadline');
 
 firstForm.addEventListener('submit', (e) => {
-e.preventDefault(); 
+    e.preventDefault(); 
+    
+    headline.innerHTML = response.value;
+    response.value = '';
+    });
 
-headline.innerHTML = response.value;
-response.value = '';
 
-});
 
 //1. Declaration of main variables for the form UI
 
 const form = document.getElementById('registrar');
 const input = form.querySelector('input');
+const mainDiv = document.querySelector('.main');
 const ul = document.getElementById('invitedList');
+
+//8. Create 3 new constant variables for our filter checkbox on the UI.
+
+const div = document.createElement('div');
+div.style.padding = "7%";
+div.style.display = "inline-block";
+const filterLabel = document.createElement('label');
+const filterCheckBox = document.createElement('input');
+
+//Set label text content and set input type to 'checkbox'.
+
+filterLabel.textContent = "Hide those who have not responded";
+filterCheckBox.type = 'checkbox';
+div.appendChild(filterLabel);
+div.appendChild(filterCheckBox);
+mainDiv.insertBefore(div, ul);
+filterCheckBox.addEventListener('change', (e) => {
+const isChecked = e.target.checked;
+//Loop through the DOM to get to the checkbox;
+const lis = ul.children;
+//If statement with 'for' to show only those invitees who have registered if checkbox is checked. 
+//Hide those that haven't.
+if(isChecked) {
+for (let i = 0; i < lis.length; i += 1) {
+let li = lis[i]; 
+if (li.className === 'responded'){   
+li.style.display = '';
+
+} else { 
+
+ li.style.display = 'none';   
+    }
+}
+
+} else {
+    for (let i = 0; i < lis.length; i += 1) {
+    let li = lis[i];
+    li.style.display = '';
+        }
+    }
+
+});
+
+
+
 
 //2. function to create the UI elements: 'li', 'label', 'checkbox' and 'button'
 
@@ -129,9 +176,7 @@ li.insertBefore(span, input);
 li.removeChild(input);
 button.textContent = 'edit';
 }
-
-
-        }
+  }
 });
 
 
